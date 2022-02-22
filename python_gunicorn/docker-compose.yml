@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  application:
+    build: .
+    command: gunicorn --workers=2 -b 0.0.0.0:7000 app.response:app 
+    ports:
+      - "7000:7000"
+    networks:
+      - app
+
+  
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile  
+    ports:
+      - "8080:80"
+    networks:
+      - app
+
+
+networks:
+  app:
+    driver: bridge

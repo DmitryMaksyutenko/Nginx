@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+
+  application:
+    build: ./app/
+    ports:
+      - "8000:3000"
+
+
+  nginx:
+    build: ./nginx/
+    ports:
+      - "8080:443"
+    volumes:
+      - "~/TestProjects/nginx/nginx_ssl/nginx/certificates:/certificates"
+    restart: always
